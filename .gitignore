@@ -8,6 +8,7 @@ wheels/
 
 # Virtual environments
 .venv
+<<<<<<< HEAD
 *.db
 
 .env
@@ -15,3 +16,7 @@ wheels/
 *.sqlite3
 
 ._*
+=======
+
+.env
+>>>>>>> 6487cbbe2d47ffd97b33338416e7adc5fa1776ad

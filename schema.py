@@ -14,6 +14,7 @@ class UserCreate(UserBase):
 
 class UserPublic(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+
     id: int
     username: str
     image_file: str | None
