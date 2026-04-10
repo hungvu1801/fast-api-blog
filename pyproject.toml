@@ -10,10 +10,6 @@ dependencies = [
     "greenlet>=3.3.1",
     "pwdlib[argon2]>=0.3.0",
     "pydantic-settings>=2.12.0",
-<<<<<<< HEAD
     "pyjwt>=2.12.1",
-=======
-    "pyjwt>=2.11.0",
->>>>>>> 6487cbbe2d47ffd97b33338416e7adc5fa1776ad
     "sqlalchemy>=2.0.46",
 ]
