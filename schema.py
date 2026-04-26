@@ -9,7 +9,7 @@ class UserBase(BaseModel):
 
 
 class UserCreate(UserBase):
-    password: str = Field(max_length=8)
+    password: str = Field(min_length=8)
 
 
 class UserPublic(BaseModel):
@@ -42,7 +42,7 @@ class PostBase(BaseModel):
 
 
 class PostCreate(PostBase):
-    user_id: int
+    pass
 
 
 class PostUpdate(BaseModel):
