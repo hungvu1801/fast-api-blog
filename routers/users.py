@@ -19,7 +19,7 @@ from auth import (
 from config import settings
 from database import get_db
 from image_utils import delete_profile_image, process_profile_image
-from schema import (
+from schemas import (
     PostResponse,
     Token,
     UserCreate,
