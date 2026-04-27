@@ -17,3 +17,5 @@ wheels/
 ._*
 
 media/profile_pics/*
+
+blog.db
