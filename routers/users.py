@@ -167,6 +167,7 @@ async def reset_password(
         ),
     )
     reset_token = result.scalars().first()
+    print(reset_token)
 
     if not reset_token:
         raise HTTPException(
@@ -186,7 +187,7 @@ async def reset_password(
         select(models.User).where(models.User.id == reset_token.user_id)
     )
     user = result.scalars().first()
-
+    print(user)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -205,6 +206,30 @@ async def reset_password(
     return {
         "message": "Password reset successfully. You can now log in with your new password."
     }
+
+
+@router.patch("/me/password", status_code=status.HTTP_200_OK)
+async def change_password(
+    password_data: ChangePasswordRequest,
+    current_user: CurrentUser,
+    db: Annotated[AsyncSession, Depends(get_db)],
+):
+    if not verify_password(password_data.current_password, current_user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Current password is incorrect.",
+        )
+
+    current_user.password_hash = hash_password(password_data.new_password)
+
+    await db.execute(
+        sql_delete(models.PasswordResetToken).where(
+            models.PasswordResetToken.user_id == current_user.id
+        )
+    )
+
+    await db.commit()
+    return {"message": "Password changed successfully."}
 
 
 @router.get("/{user_id}", response_model=UserPublic)
